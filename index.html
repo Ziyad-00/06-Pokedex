@@ -7,15 +7,35 @@
     <title>Pokedex</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
-    <link rel="shortcut icon" href="./assets/icons/pokemonBall.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./assets/icons/ball.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barriecito&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
 </head>
 
 <body onload="getCharacter()">
-    <div class="container">
-        <h1> Hello to the Pokemon World</h1>
-        <div id="content">
+    <header>
+        <nav>
+            <img src="./assets/icons/ball.png" alt="pokemon ball">
+            <form action="">
+                <input type="text" placeholder="Search here...">
+                <button> <img src="./assets/icons/search-interface-symbol.png"></button>
+            </form>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <h1> Hello to the Pokemon World</h1>
+            <div id="content">
+            </div>
+            <button id="loadMore">
+                <p>load More</p> <img src="./assets/icons/arrow.png" alt="download photo">
+            </button>
         </div>
-    </div>
+    </main>
+
 </body>
 
 </html>
