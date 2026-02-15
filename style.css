@@ -101,6 +101,7 @@ body {
                     height: 512px;
                     border: 2px solid black;
                     border-radius: 12px;
+                    cursor: pointer;
 
                     .card_content {
                         padding-top: 24px;
@@ -111,6 +112,7 @@ body {
                         flex-direction: column;
                         justify-content: center;
                         align-items: center;
+                        gap: 24px;
                         border-radius: 12px;
 
                         h2 {
@@ -120,6 +122,15 @@ body {
                         img {
                             width: 260px;
                             height: auto;
+                        }
+
+                        .types {
+                            font-size: 20px;
+                            background-color: aquamarine;
+                            text-transform: uppercase;
+                            text-align: center;
+
+                            p {}
                         }
                     }
                 }

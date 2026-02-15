@@ -2,21 +2,20 @@ let charactersArray = [];
 let nextUrl = '';
 
 async function getCharacter() {
-    // 1. Daten holen
     const response = await fetch('https://pokeapi.co/api/v2/pokemon');
     const data = await response.json();
-
-    // 2. Die Liste der Pokémon in unser Array speichern
-    charactersArray = data.results;
-
-    // 3. Die Render-Funktion mit dem Array aufrufen
-    render(charactersArray);
-
-
-    //console.log(charactersArray); zum test
-
+    const shortList = data.results;
     nextUrl = data.next;
-    // get nextpage link
+
+    charactersArray = [];
+    // Details einzeln laden ohne map
+    for (let i = 0; i < shortList.length; i++) {
+        const detailResponse = await fetch(shortList[i].url);
+        const pokemonDetail = await detailResponse.json();
+        charactersArray.push(pokemonDetail);
+    }
+
+    render(charactersArray);
 }
 
 function render(list) {
@@ -24,19 +23,24 @@ function render(list) {
     contentRef.innerHTML = '';
 
     for (let i = 0; i < list.length; i++) {
-        let pokemon = list[i];
+        let pokemonData = list[i];
+        let imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonData.id}.png`;
 
-        // Hinweis: Da das Bild in der Liste fehlt, nutzen wir hier einen Trick mit der ID
-        let pokemonId = pokemon.url.split('/')[6];
-        let imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`;
+        // DEINE LOGIK FÜR DIE TYPEN (OHNE MAP):
+        let typesArray = pokemonData.types;
+        let typesHtml = "";
+
+        for (let j = 0; j < typesArray.length; j++) {
+            typeName = typesArray[j].type.name
+            typesHtml += `<p>${typeName}</p>`
+        }
 
         contentRef.innerHTML += `
         <div class="card">
             <div class="card_content">
-                <h2>${pokemon.name}</h2>
-                <div>
-                    <img src="${imageUrl}" alt="${pokemon.name}">
-                </div>
+                <h2>${pokemonData.name}</h2>
+                <img src="${imageUrl}" alt="${pokemonData.name}">
+                <div class="types">${typesHtml}</div>
             </div>
         </div>
         `;
