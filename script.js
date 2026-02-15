@@ -1,4 +1,5 @@
 let charactersArray = [];
+let nextUrl = '';
 
 async function getCharacter() {
     // 1. Daten holen
@@ -10,7 +11,12 @@ async function getCharacter() {
 
     // 3. Die Render-Funktion mit dem Array aufrufen
     render(charactersArray);
-    console.log(charactersArray);
+
+
+    //console.log(charactersArray); zum test
+
+    nextUrl = data.next;
+    // get nextpage link
 }
 
 function render(list) {
@@ -23,7 +29,6 @@ function render(list) {
         // Hinweis: Da das Bild in der Liste fehlt, nutzen wir hier einen Trick mit der ID
         let pokemonId = pokemon.url.split('/')[6];
         let imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`;
-        console.log(imageUrl);
 
         contentRef.innerHTML += `
         <div class="card">
@@ -36,6 +41,19 @@ function render(list) {
         </div>
         `;
     }
+}
+
+async function loadMoreFunc() {
+    if (!nextUrl) return;
+
+    const response = await fetch(nextUrl);
+    const data = await response.json();
+
+    charactersArray.push(...data.results)
+    nextUrl = data.next;
+    console.log("button test");
+
+    render(charactersArray);
 }
 
 

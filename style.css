@@ -134,6 +134,7 @@ body {
                 align-items: center;
                 gap: 12px;
                 border-radius: 12px;
+                cursor: pointer;
 
                 p {
                     font-size: 24px;
