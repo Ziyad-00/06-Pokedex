@@ -18,7 +18,6 @@ function getPokemonCardTemplate(pokemonData, color) {
         </div>`;
 }
 
-
 function getDialogInternalTemplate(pokemon, color, activeTab) {
     return `
         <div class="card-header">
@@ -59,4 +58,18 @@ function getStatsTemplate(pokemon) {
             </div>`;
     }
     return `<div class="stats-list">${statsHtml}</div>`;
+}
+
+function renderActiveTabContent(pokemon, tab) {
+    if (tab === 'about') {
+        let abilities = "";
+        for (let j = 0; j < pokemon.abilities.length; j++) {
+            abilities += pokemon.abilities[j].ability.name + (j < pokemon.abilities.length - 1 ? ", " : "");
+        }
+        return `<div class="info-row"><span>Species</span> <span>${pokemon.name}</span></div>
+                <div class="info-row"><span>Height</span> <span>${pokemon.height / 10} m</span></div>
+                <div class="info-row"><span>Weight</span> <span>${pokemon.weight / 10} kg</span></div>
+                <div class="info-row"><span>Abilities</span> <span>${abilities}</span></div>`;
+    }
+    return getStatsTemplate(pokemon);
 }
