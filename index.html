@@ -7,6 +7,7 @@
     <title>Pokedex</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
+    <script src="./scripts/templates.js"></script>
     <link rel="shortcut icon" href="./assets/icons/ball.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,11 +17,11 @@
 </head>
 
 <body onload="getCharacter()">
-    <header>
+    <header id="topHome">
         <nav>
             <img src="./assets/icons/ball.png" alt="pokemon ball">
             <form action="">
-                <input type="text" placeholder="Search here...">
+                <input id="searching" type="text" placeholder="Search here...">
                 <button> <img src="./assets/icons/search-interface-symbol.png"></button>
             </form>
         </nav>
@@ -28,14 +29,20 @@
     <main>
         <div class="container">
             <h1> Hello to the Pokemon World</h1>
-            <div id="content">
+            <div id="loader" class="hidden"></div>
+            <div id="content"></div>
+            <div class="moreAndHomeBtns">
+                <button id="loadMore" onclick="loadMoreFunc()">
+                    <img src="./assets/icons/arrow.png" alt="download photo">
+                </button>
+                <a id="goHome" href="#topHome">
+                    <img src="./assets/icons/home.png" alt="">
+                </a>
             </div>
-            <button id="loadMore" onclick="loadMoreFunc()">
-                <p>load More</p> <img src="./assets/icons/arrow.png" alt="download photo">
-            </button>
         </div>
     </main>
-
 </body>
+<dialog id="pokemonCard">
+</dialog>
 
 </html>
