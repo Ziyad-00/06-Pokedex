@@ -126,6 +126,30 @@ document.getElementById('pokemonCard').addEventListener('click', function (event
     }
 });
 
+async function loadMoreFunc() {
+    if (!nextUrl || document.getElementById('loader').classList.contains('active')) return;
+
+    showLoader();
+    try {
+        const response = await fetch(nextUrl);
+        const data = await response.json();
+        nextUrl = data.next;
+
+        for (let i = 0; i < data.results.length; i++) {
+            const pName = data.results[i].name;
+            if (!pokemonCache[pName]) {
+                const detailResp = await fetch(data.results[i].url);
+                pokemonCache[pName] = await detailResp.json();
+            }
+            charactersArray.push(pokemonCache[pName]);
+        }
+        render(charactersArray);
+    } catch (e) {
+        console.error("Ladefehler:", e);
+    }
+    hideLoader();
+}
+
 function updateDialogContent(pool = charactersArray) {
     const pokemon = pool[currentIndex];
     const dialog = document.getElementById('pokemonCard');

@@ -265,6 +265,8 @@ dialog {
 
         .types-row {
             display: flex;
+            flex-direction: column;
+            width: fit-content;
             gap: 8px;
             margin-top: 10px;
 
@@ -278,9 +280,10 @@ dialog {
 
         .header-pokemon-img {
             width: 200px;
+            height: auto;
             position: absolute;
             bottom: -10px;
-            left: clamp(45%, 6vw, 70%);
+            left: 50%;
             transform: translateX(-50%);
         }
     }
@@ -371,11 +374,16 @@ dialog {
                 border-radius: 18px;
                 transition-duration: 0.4s;
 
-
                 &:hover {
                     background-color: #919191;
                 }
             }
         }
+    }
+}
+
+@media (max-width: 448px) {
+    .type-badge {
+        display: none;
     }
 }
