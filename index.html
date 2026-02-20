@@ -21,8 +21,12 @@
         <nav>
             <img src="./assets/icons/ball.png" alt="pokemon ball" onclick="location.reload()" style="cursor: pointer;">
             <form action="">
-                <input id="searching" type="text" placeholder="3 letters to start search &#128522;">
-                <button> <img src="./assets/icons/search-interface-symbol.png"></button>
+                <input id="searching" type="text" placeholder="Find a pokemon...">
+                <div id="search-info"
+                    style="display: none; color: #ee2525; font-size: 16px; margin-top: 10px; font-weight: bold;">
+                    3 Letters minimum!
+                </div>
+                <button id="submit"> <img src="./assets/icons/search-interface-symbol.png"></button>
             </form>
         </nav>
     </header>

@@ -34,20 +34,60 @@ function toggleLoadMoreButton(show) {
     const btn = document.getElementById('loadMore');
     if (btn) btn.style.display = show ? 'flex' : 'none';
 }
-document.getElementById('searching').addEventListener('input', (e) => {
-    const term = e.target.value.toLowerCase();
+// document.getElementById('searching').addEventListener('input', (e) => {
+//     const term = e.target.value.toLowerCase();
 
-    if (term.length === 0) {
-        searchResults = [];
-        toggleLoadMoreButton(true);
-        return render(charactersArray);
-    }
-    toggleLoadMoreButton(false);
-    if (term.length >= 3) {
-        showLoader();
-        setTimeout(() => executeSearch(term), 800);
-    }
+//     if (term.length === 0) {
+//         searchResults = [];
+//         toggleLoadMoreButton(true);
+//         return render(charactersArray);
+//     }
+//     toggleLoadMoreButton(false);
+//     if (term.length >= 3) {
+//         showLoader();
+//         setTimeout(() => executeSearch(term), 800);
+//     }
+// });
+
+let lastSearchTerm = '';
+
+document.getElementById('searching').addEventListener('input', (e) => {
+    checkSearchInput(e.target.value.trim());
 });
+
+document.querySelector('header form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    handleSearchSubmit(document.getElementById('searching').value.toLowerCase().trim());
+});
+
+function checkSearchInput(term) {
+    const info = document.getElementById('search-info');
+    if (info) {
+        info.style.display = (term.length > 0 && term.length < 3) ? 'block' : 'none';
+    }
+}
+
+function handleSearchSubmit(term) {
+    if (term.length >= 3 && term !== lastSearchTerm) {
+        lastSearchTerm = term;
+        processSearch(term);
+    } else if (term.length === 0) {
+        resetSearch();
+    }
+}
+
+function resetSearch() {
+    lastSearchTerm = '';
+    searchResults = [];
+    toggleLoadMoreButton(true);
+    render(charactersArray);
+}
+
+function processSearch(term) {
+    toggleLoadMoreButton(false);
+    showLoader();
+    setTimeout(() => executeSearch(term), 400);
+}
 
 
 function executeSearch(term) {
@@ -178,10 +218,20 @@ function getTypeColor(type) {
     const colors = { grass: '#78C850', fire: '#F08030', water: '#6890F0', bug: '#869215', normal: '#a3a3a3', poison: '#A43E9E', electric: '#ffd633', ground: '#c0ac75', fairy: '#EE99AC', fighting: '#C03028', psychic: '#F85888', rock: '#B8A038', ghost: '#705898', ice: '#98D8D8', dragon: '#7038F8' };
     return colors[type] || '#A8A878';
 }
-function closeDialog() { document.getElementById('pokemonCard').close(); }
-function showLoader() { document.getElementById('loader')?.classList.add('active'); }
-function hideLoader() { document.getElementById('loader')?.classList.remove('active'); }
-document.getElementById('pokemonCard').addEventListener('click', (e) => { if (e.target.nodeName === 'DIALOG') closeDialog(); });
+function closeDialog() {
+    document.getElementById('pokemonCard').close();
+}
+function showLoader() {
+    document.getElementById('loader')?.classList.add('active');
+}
+function hideLoader() {
+    document.getElementById('loader')?.classList.remove('active');
+}
+
+document.getElementById('pokemonCard').addEventListener('click', (e) => {
+    if (e.target.nodeName === 'DIALOG') closeDialog();
+});
+
 document.querySelector('header form')?.addEventListener('submit', (e) => e.preventDefault());
 
 function goHome() {
