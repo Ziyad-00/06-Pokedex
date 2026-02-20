@@ -109,6 +109,11 @@ body {
                     border-radius: 12px;
                     cursor: pointer;
 
+                    :hover {
+                        transform: scale(1.05);
+                        /* Karte wird minimal größer */
+                    }
+
                     .card_content {
                         padding-top: 24px;
                         width: 100%;
@@ -119,6 +124,7 @@ body {
                         align-items: center;
                         gap: 24px;
                         border-radius: 12px;
+
 
                         .card-types-container {
                             display: flex;
