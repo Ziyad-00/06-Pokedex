@@ -266,6 +266,7 @@ dialog {
     padding: 0;
     position: fixed;
     margin: auto;
+    overscroll-behavior: contain;
 
     &[open] {
         display: flex;

@@ -89,7 +89,6 @@ function processSearch(term) {
     setTimeout(() => executeSearch(term), 400);
 }
 
-
 function executeSearch(term) {
     searchResults = [];
     for (let i = 0; i < charactersArray.length; i++) {
@@ -184,7 +183,16 @@ function openDetails(id) {
         if (pool[i].id === id) { currentIndex = i; break; }
     }
     updateDialogContent(pool);
+    document.body.style.position = 'fixed';
+    document.body.style.width = '100%';
     document.getElementById('pokemonCard').showModal();
+}
+
+function closeDialog() {
+    document.body.style.position = '';
+    document.body.style.width = '';
+
+    document.getElementById('pokemonCard').close();
 }
 
 function renderTypesHtml(types) {
@@ -215,12 +223,16 @@ function backPokemon() {
     updateDialogContent(pool);
 }
 function getTypeColor(type) {
-    const colors = { grass: '#78C850', fire: '#F08030', water: '#6890F0', bug: '#869215', normal: '#a3a3a3', poison: '#A43E9E', electric: '#ffd633', ground: '#c0ac75', fairy: '#EE99AC', fighting: '#C03028', psychic: '#F85888', rock: '#B8A038', ghost: '#705898', ice: '#98D8D8', dragon: '#7038F8' };
+    const colors = {
+        grass: '#78C850', fire: '#F08030',
+        water: '#6890F0', bug: '#869215', normal: '#a3a3a3',
+        poison: '#A43E9E', electric: '#ffd633', ground: '#c0ac75',
+        fairy: '#EE99AC', fighting: '#C03028', psychic: '#F85888',
+        rock: '#B8A038', ghost: '#705898', ice: '#98D8D8', dragon: '#7038F8'
+    };
     return colors[type] || '#A8A878';
 }
-function closeDialog() {
-    document.getElementById('pokemonCard').close();
-}
+
 function showLoader() {
     document.getElementById('loader')?.classList.add('active');
 }
