@@ -213,30 +213,32 @@ body {
 #loader {
     display: none;
     position: fixed;
-    inset: 0;
-    /* Entspricht top, left, bottom, right: 0 */
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.8);
-    z-index: 10000;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
     justify-content: center;
     align-items: center;
+    pointer-events: all;
 }
 
 #loader.active {
     display: flex;
-    /* Ein einfacher Kreis, der sich dreht */
-    border: 16px solid #f3f3f3;
-    border-top: 16px solid #c7240e;
-    border-right: 16px solid #75e947;
-    border-bottom: 16px solid #1b9ef5;
-    border-left: 16px solid #e7eb08;
+}
+
+#loader::after {
+    content: "";
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #1799f0;
+    border-left: 5px solid #ee2525;
+    border-bottom: 5px solid #f8e432;
+    border-right: 5px solid #57f837;
     border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    animation: spin 2s linear infinite;
-    /* Zentrierung im Screen */
-    margin: auto;
+    animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
